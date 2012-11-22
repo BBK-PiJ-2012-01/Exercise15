@@ -1,18 +1,18 @@
+package first;
 
 import org.junit.*;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
-* Created with IntelliJ IDEA.
-* User: Sam Wright
-* Date: 19/11/2012
-* Time: 13:50
-*/
+ * Created with IntelliJ IDEA.
+ * User: Sam Wright
+ * Date: 19/11/2012
+ * Time: 13:50
+ */
 public class ThinkingRecursivelyTest {
     List<Integer> expected;
 
@@ -42,7 +42,7 @@ public class ThinkingRecursivelyTest {
 
     @Test
     public void testCheckOutput() throws Exception {
-        setExpected(new Integer[]{3,4,5});
+        setExpected(new Integer[]{3, 4, 5});
 
         ThinkingRecursively.println(3);
         ThinkingRecursively.println(4);
