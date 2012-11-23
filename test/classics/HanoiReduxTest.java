@@ -12,8 +12,8 @@ import static org.junit.Assert.*;
 public class HanoiReduxTest {
     @Test
     public void testGetNumberOfOps() throws Exception {
-        assertEquals(3, HanoiRedux.getNumberOfOps2(2));
-        assertEquals(11, HanoiRedux.getNumberOfOps2(4));
-        assertEquals(45, HanoiRedux.getNumberOfOps2(6));
+        assertEquals(3, HanoiRedux.getNumberOfOps(2));
+        assertEquals(11, HanoiRedux.getNumberOfOps(4));
+        assertEquals(45, HanoiRedux.getNumberOfOps(6));
     }
 }

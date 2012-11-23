@@ -99,7 +99,7 @@ public class HanoiRedux {
      integrate left[3] + right[3] -> centre      + 1 + move[5]
      integrate right[2] -> left[3]               + 1 + move[3]
      integrate left[2] + right[1] -> centre      + 1 + move[2]
-     integrate left[1] -> right[1]               1
+     integrate left[1] -> right[0]               1
                                                 }
 
 
@@ -113,7 +113,7 @@ public class HanoiRedux {
 
      bottom-up moves (n=14):
                                              1 + 2 * {
-                                                 + 1 + move[14]
+                                                 + 1 + move[12]
 
      integrate left[6] -> right[5]               + 1 + move[10]
      integrate left[5] + right[5] -> centre      + 1 + move[9]
@@ -121,43 +121,110 @@ public class HanoiRedux {
      integrate left[4] + right[3] -> centre      + 1 + move[6]
      integrate left[3] -> right[2]               + 1 + move[4]
      integrate left[2] + right[2] -> centre      + 1 + move[3]
-     integrate right[1] -> left[2]               3
+
+     integrate right[1] -> left[1]               3
                                                 }
 
-    NB. if n/2 % 2 = 0, the first move is left[1] -> right[1] or right[1] -> left[1],
-                so uses move[i] where not i % 3 == 1
-      and if n/2 % 2 = 1, the first move is left[1] + right[1] -> centre.
-                so uses move[i] where not i % 3 == 0
+    eg n=12
 
-    so:
+     1      2
+     3      4
+     5      6
+     7      8
+     9      10
+     11     12                             1 + 2 * {
+                                                + 1 + move[10]
 
+    integrate left[5] -> right[4]               + 1 + move[8]
+    integrate left[4] + right[4] -> centre      + 1 + move[7]
+    integrate right[3] -> left[3]               + 1 + move[5]
+    integrate left[3] + right[2] -> centre      + 1 + move[3]
+    integrate left[2] -> right[1]               + 1 + move[2]
+    integrate left[1] + right[1] -> centre      2
+                                               }
+
+    eg n=10
+
+     1      2
+     3      4
+     5      6
+     7      8
+     9      10                                         1 + 2 * {
+                                                + 1 + move[8]
+
+    integrate left[4] -> right[3]               + 1 + move[6]
+    integrate left[3] + right[3] -> centre      + 1 + move[5]
+    integrate right[2] -> left[2]               + 1 + move[3]
+    integrate left[2] + right[1] -> centre      + 1 + move[2]
+    integrate left[1] -> right[0]               1
+                                               }
+
+    eg n=8
+
+     1      2
+     3      4
+     5      6
+     7      8
+                                            1 + 2 * {
+                                                + 1 + move[6]
+
+    integrate left[3] -> right[2]               + 1 + move[4]
+    integrate left[2] + right[2] -> centre      + 1 + move[3]
+    integrate right[1] -> left[1]               3
+                                               }
+
+
+    eg n=6
+
+     1      2
+     3      4
+     5      6
+
+                                            1 + 2 * {
+                                                + 1 + move[4]
+    integrate left[2] -> right[1]               + 1 + move[2]
+    integrate left[1] + right[1] -> centre      2
+
+
+    //  SUMMARY
+    integrate left[1] -> right[0]               1   (n = 10, 16) min_i = 2
+    integrate right[1] -> left[1]               3   (n = 8, 14) min_i = 3
+    integrate left[1] + right[1] -> centre      2   (n = 6, 12) min_i = 2
+    //
 
      */
 
-    public static int getNumberOfOps2(int n) {
+    public static int getNumberOfOps(int n) {
         int ops_to_move_i_discs = 0;
+        System.out.format("-------- n = %d --------\n", n);
+        //int ops = (n/2%2 == 1 && n > 2) ? 3 : 1;
 
-        int ops = (n/2%2 == 1 && n > 2) ? 3 : 1;
+        int ops, min_i;
+        if (n == 2) {
+            ops = 1;
+            min_i = 1;
+        } else if ((n / 2) % 3 == 0) {
+            ops = 2;
+            min_i = 2;
+        } else if ((n / 2) % 3 == 1) {
+            ops = 3;
+            min_i = 3;
+        } else {
+            ops = 1;
+            min_i = 2;
+        }
+
+        System.out.format(" start with %d\n", ops);
 
         for (int i= 1; i <= n-2; ++i) {
             ops_to_move_i_discs = ops_to_move_i_discs * 2 + 1;
-            if ((n/2%2 == 0 && i % 3 == 1) || (n/2%2 == 1 && (i % 3 == 2 || i < 3)))
+            if ((n - i) % 3 == 0 || i < min_i)
                 continue;
+            System.out.format("+ 1 + move[%d]\n", i);
             ops += 1 + ops_to_move_i_discs;
         }
 
         return ops * 2 + 1;
     }
 
-    public static int getNumberOfOps(int n) {
-        int ops = 3;
-
-        int ops_to_move_i_discs = 1;
-        for (int i=1; i <= n-2; ++i) {
-            ops += ops_to_move_i_discs*2;
-            ops_to_move_i_discs = ops_to_move_i_discs * 2 + 1;
-        }
-
-        return ops;
-    }
 }
