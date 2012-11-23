@@ -16,10 +16,10 @@ import static org.junit.Assert.*;
  * Time: 14:53
  */
 public class FibonnacciTest {
-    Fibonnacci fib_memo, fib_nomemo;
-    List<Integer> first_ten = new LinkedList<Integer>(Arrays.asList(
+    private Fibonnacci fib_memo, fib_nomemo;
+    private List<Integer> first_ten = new LinkedList<Integer>(Arrays.asList(
             new Integer[] {0,1,1,2,3,5,8,13,21,34}));
-    LinkedList<Integer> calculated = new LinkedList<Integer>();
+    private LinkedList<Integer> calculated = new LinkedList<Integer>();
     private long counter;
 
     @Before

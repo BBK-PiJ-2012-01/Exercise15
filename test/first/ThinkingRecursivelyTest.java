@@ -14,7 +14,7 @@ import java.util.List;
  * Time: 13:50
  */
 public class ThinkingRecursivelyTest {
-    List<Integer> expected;
+    private List<Integer> expected;
 
     private void setExpected(Integer[] expected_array) {
         expected = new ArrayList<Integer>(Arrays.asList(expected_array));
@@ -26,11 +26,6 @@ public class ThinkingRecursivelyTest {
         setExpected(new Integer[]{6,4,2,2,1,1,4,3,1,1,3,6});
         ThinkingRecursively.printNumbers(6);
         assertTrue(ThinkingRecursively.checkOutput(expected));
-    }
-
-    @Test
-    public void testDoggyMethod() throws Exception {
-
     }
 
     @Test

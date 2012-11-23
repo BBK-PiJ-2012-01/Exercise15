@@ -7,7 +7,7 @@ package otherExamples;
  * Time: 15:38
  */
 public class PaperSizes {
-    private class BadInput extends Exception{};
+    private class BadInput extends Exception{}
     private int p;
 
     private int getPowerOfTwo(String input) throws BadInput {

@@ -69,7 +69,7 @@ public class Board implements Iterable<Position>  {
     }
 
     public String toString() {
-        StringBuffer output = new StringBuffer();
+        StringBuilder output = new StringBuilder();
         for (int col=0; col<33; ++col) {
             output.append('-');
         }
